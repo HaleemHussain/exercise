@@ -39,5 +39,40 @@
             {!! $product->description !!}
             <p>&pound;{{ $product->price }}</p>
         </div>
+        <div class="mt-8">
+            @if(session('success'))
+                <p class="text-green-600 font-bold mt-4">{{ session('success') }}</p>
+            @endif
+            <h2>Product Enquiry</h2>
+            <form method="POST" action="{{ route('product.enquiry', $product) }}">
+                @csrf
+
+                <div class="mt-4">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" value="{{ old('name') }}"
+                           class="block w-full border border-gray-300 rounded p-2 mt-1">
+                    @error('name') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="mt-4">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}"
+                           class="block w-full border border-gray-300 rounded p-2 mt-1">
+                    @error('email') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div class="mt-4">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4"
+                              class="block w-full border border-gray-300 rounded p-2 mt-1">{{ old('message') }}</textarea>
+                    @error('message') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <button type="submit"
+                        class="mt-4 bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+                    Send Enquiry
+                </button>
+            </form>
+        </div>
     </div>
 </x-layout>

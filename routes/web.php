@@ -20,3 +20,11 @@ Route::get('/', [PageController::class, 'home'])->name('homepage');
 Route::resource('/page', PageController::class)->only(['show']);
 
 Route::resource('/product', ProductController::class)->only(['show']);
+
+Route::post('/product/{product}/enquiry', [ProductController::class, 'enquiry'])->name('product.enquiry');
+
+// this route is to see how the email will look. the email is set to log in the env file so will be sent there.
+Route::get('/email-preview', function () {
+    $product = App\Models\Product::first();
+    return new App\Mail\ProductEnquiry($product, 'Haleem Hussain', 'haleem@gmail.com', 'Is this still available?');
+});
