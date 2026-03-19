@@ -136,3 +136,5 @@ main {
         column-gap: 1.5rem;
     }
 }
+
+@tailwind utilities;
