@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description', 'image', 'price', 'slug'];
+
     protected static function boot()
     {
         parent::boot();
@@ -22,5 +24,10 @@ class Product extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 }

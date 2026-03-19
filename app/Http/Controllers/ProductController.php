@@ -11,6 +11,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product->load('images');
         return view('product.show', compact('product'));
     }
 }
